@@ -12,7 +12,7 @@ alexaApp.express({
     debug: true
 });
 
-app.set("view", "ejs");
+app.set("view engine", "ejs");
 
 alexaApp.launch((req, res) => {
     res.say("Application Started...");
