@@ -1,49 +1,27 @@
-const Alexa = require('ask-sdk-core');
+const express = require('express');
+const Alexa = require('alexa-app');
 
-const LaunchRequestHandler = {
-    canHandle(handlerInput) {
-      return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
-    },
-    handle(handlerInput) {
-      const speechText = 'Welcome to the Alexa Skills Kit, you can say hello!';
-  
-      return handlerInput.responseBuilder
-        .speak(speechText)
-        .reprompt(speechText)
-        .withSimpleCard('Hello World', speechText)
-        .getResponse();
-    }
-  };
+const PORT = process.env.PORT || 8080;
+const app = express();
 
-  const HelpIntentHandler = {
-    canHandle(handlerInput) {
-      return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-        && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.HelpIntent';
-    },
-    handle(handlerInput) {
-      const speechText = 'You can say hello to me!';
-  
-      return handlerInput.responseBuilder
-        .speak(speechText)
-        .reprompt(speechText)
-        .withSimpleCard('Hello World', speechText)
-        .getResponse();
-    }
-  };
+const alexaApp = new Alexa.app("test");
 
-  const CancelAndStopIntentHandler = {
-    canHandle(handlerInput) {
-      return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-        && (handlerInput.requestEnvelope.request.intent.name === 'AMAZON.CancelIntent'
-          || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent');
-    },
-    handle(handlerInput) {
-      const speechText = 'Goodbye!';
-  
-      return handlerInput.responseBuilder
-        .speak(speechText)
-        .withSimpleCard('Hello World', speechText)
-        .withShouldEndSession(true)
-        .getResponse();
-    }
-  };
+alexaApp.express({
+    expressApp: app,
+    checkCert: false,
+    debug: true
+});
+
+app.set("view", "ejs");
+
+alexaApp.launch((req, res) => {
+    res.say("Application Started...");
+});
+
+alexaApp.intent("MainIntent",  (req, res) => {
+    res.say("Welcome to main intent");
+});
+
+app.listen(PORT, () => {
+    console.log("Express Server is Running...");
+})
