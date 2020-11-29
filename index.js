@@ -32,4 +32,6 @@ const adapter = new ExpressAdapter(skill, false, false);
 
 app.post('/', adapter.getRequestHandlers());
 
-app.listen(PORT);
+app.listen(PORT, () => {
+    console.log("Server is Running...");
+});
