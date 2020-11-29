@@ -1,6 +1,7 @@
 const express = require('express');
 const { ExpressAdapter } = require('ask-sdk-express-adapter');
 const Alexa = require('ask-sdk-core');
+const data = require("./assets/calendar.json");
 
 var PORT = process.env.PORT || 5000;
 
@@ -12,7 +13,7 @@ const LaunchRequestHandler = {
         return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
     },
     handle(handlerInput) {
-        const speechText = 'Hello World - Your skill has launched';
+        const speechText = 'Benvenuto nella skill del Calendario Ecologico della città di Pineto';
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -22,8 +23,36 @@ const LaunchRequestHandler = {
     }
 };
 
+const MainRequestHandler = {
+    canHandle(handlerInput){
+        return handlerInput.requestEnvelope.request.intent.name === "MainIntent";
+    },
+    handle(handlerInput){
+
+        var dateOfRequest = new Date(handlerInput.requestEnvelope.request.timestamp);
+        var dayOfRequest = dateOfRequest.getDay();
+        var monthOfRequest = dateOfRequest.getMonth();
+
+        var toThrow = data.months[monthOfRequest].days[dayOfRequest].toThrow;
+
+        var speechText = "Ecco cosa c'è da buttare oggi: ";
+
+        toThrow.forEach((element, index) => {
+            speechText += element;
+            speechText += ((index == toThrow.length - 1) ? "" : ", ")
+        });
+
+        return handlerInput.responseBuilder
+            .speak(speechText)
+            .reprompt(speechText)
+            .withSimpleCard('Main Response', speechText)
+            .getResponse();
+    }
+}
+
 skillBuilder.addRequestHandlers(
-    LaunchRequestHandler
+    LaunchRequestHandler,
+    MainRequestHandler
 )
 
 const skill = skillBuilder.create();

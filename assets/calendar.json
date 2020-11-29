@@ -1,0 +1,58 @@
+{
+    "months": [
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {
+            "days": [
+                {
+                    "toThrow": [
+                        "organico",
+                        "plastica"
+                    ]
+                },
+                {
+                    "toThrow": [
+
+                    ]
+                },
+                {
+                    "toThrow": [
+                        "indifferenziato"
+                    ]
+                },
+                {
+                    "toThrow": [
+                        "organico",
+                        "carta"
+                    ]
+                },
+                {
+                    "toThrow": [
+                        "organico",
+                        "plastica"
+                    ]
+                },
+                {
+                    "toThrow": [
+
+                    ]
+                },
+                {
+                    "toThrow": [
+                        "organico",
+                        "plastica"
+                    ]
+                }
+            ]
+        },
+        {}
+    ]
+}
