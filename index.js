@@ -60,7 +60,7 @@ const HelpIntentHandler = {
             && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.HelpIntent';
     },
     handle(handlerInput) {
-        const speakOutput = 'You can say hello to me! How can I help?';
+        const speakOutput = 'Chiedi ad Alexa cosa devi buttare oggi, e lei ti risponderà';
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
