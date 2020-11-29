@@ -1,27 +1,35 @@
 const express = require('express');
-const Alexa = require('alexa-app');
+const { ExpressAdapter } = require('ask-sdk-express-adapter');
+const Alexa = require('ask-sdk-core');
 
-const PORT = process.env.PORT || 8080;
+var PORT = process.env.port || 8080;
+
 const app = express();
+const skillBuilder = Alexa.SkillBuilders.custom();
 
-const alexaApp = new Alexa.app("test");
+const LaunchRequestHandler = {
+    canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
+    },
+    handle(handlerInput) {
+        const speechText = 'Hello World - Your skill has launched';
 
-alexaApp.express({
-    expressApp: app,
-    checkCert: false,
-    debug: true
-});
+        return handlerInput.responseBuilder
+            .speak(speechText)
+            .reprompt(speechText)
+            .withSimpleCard('Hello World', speechText)
+            .getResponse();
+    }
+};
 
-app.set("view engine", "ejs");
+skillBuilder.addRequestHandlers(
+    LaunchRequestHandler
+)
 
-alexaApp.launch((req, res) => {
-    res.say("Application Started...");
-});
+const skill = skillBuilder.create();
 
-alexaApp.intent("MainIntent",  (req, res) => {
-    res.say("Welcome to main intent");
-});
+const adapter = new ExpressAdapter(skill, false, false);
 
-app.listen(PORT, () => {
-    console.log("Express Server is Running...");
-})
+app.post('/', adapter.getRequestHandlers());
+
+app.listen(PORT);
