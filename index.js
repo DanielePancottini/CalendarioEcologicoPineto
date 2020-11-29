@@ -36,7 +36,10 @@ const MainRequestHandler = {
 
         var toThrow = data.days[dayOfRequest].toThrow;
 
-        var speechText = "Ecco cosa c'è da buttare oggi: ";
+        console.log(toThrow);
+        
+
+        var speechText = (toThrow.length > 0) ? "Ecco cosa c'è da buttare oggi: " : "Oggi non c'è nulla da buttare";
 
         toThrow.forEach((element, index) => {
             speechText += element;
@@ -50,6 +53,11 @@ const MainRequestHandler = {
             .getResponse();
     }
 }
+
+skillBuilder.addRequestHandlers(
+    LaunchRequestHandler,
+    MainRequestHandler
+);
 
 const skill = skillBuilder.create();
 
