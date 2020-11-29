@@ -2,7 +2,7 @@ const express = require('express');
 const { ExpressAdapter } = require('ask-sdk-express-adapter');
 const Alexa = require('ask-sdk-core');
 
-var PORT = process.env.port || 5000;
+var PORT = process.env.PORT || 5000;
 
 const app = express();
 const skillBuilder = Alexa.SkillBuilders.custom();
