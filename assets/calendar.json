@@ -1,58 +1,41 @@
 {
-    "months": [
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
+    "days": [
         {
-            "days": [
-                {
-                    "toThrow": [
-                        "organico",
-                        "plastica"
-                    ]
-                },
-                {
-                    "toThrow": [
-
-                    ]
-                },
-                {
-                    "toThrow": [
-                        "indifferenziato"
-                    ]
-                },
-                {
-                    "toThrow": [
-                        "organico",
-                        "carta"
-                    ]
-                },
-                {
-                    "toThrow": [
-                        "organico",
-                        "plastica"
-                    ]
-                },
-                {
-                    "toThrow": [
-
-                    ]
-                },
-                {
-                    "toThrow": [
-                        "organico",
-                        "plastica"
-                    ]
-                }
+            "toThrow":[
+                
             ]
         },
-        {}
+        {
+           "toThrow": [
+
+           ] 
+        },
+        {
+            "toThrow": [
+                "organico",
+                "carta"
+            ] 
+        },
+        {
+            "toThrow": [
+
+            ] 
+        },
+        {
+            "toThrow": [
+                "indifferenziato"
+            ] 
+        },
+        {
+            "toThrow":[
+
+            ]
+        },
+        {
+            "toThrow":[
+                "organico",
+                "plastica"
+            ]
+        }
     ]
 }

@@ -2,6 +2,7 @@ const express = require('express');
 const { ExpressAdapter } = require('ask-sdk-express-adapter');
 const Alexa = require('ask-sdk-core');
 const data = require("./assets/calendar.json");
+const fs = require("fs");
 
 var PORT = process.env.PORT || 5000;
 
@@ -18,7 +19,7 @@ const LaunchRequestHandler = {
         return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(speechText)
-            .withSimpleCard('Hello World', speechText)
+            .withSimpleCard('Calendario Ecologico Pineto', speechText)
             .getResponse();
     }
 };
@@ -33,7 +34,7 @@ const MainRequestHandler = {
         var dayOfRequest = dateOfRequest.getDay();
         var monthOfRequest = dateOfRequest.getMonth();
 
-        var toThrow = data.months[monthOfRequest].days[dayOfRequest].toThrow;
+        var toThrow = data.days[dayOfRequest].toThrow;
 
         var speechText = "Ecco cosa c'è da buttare oggi: ";
 
@@ -45,15 +46,10 @@ const MainRequestHandler = {
         return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(speechText)
-            .withSimpleCard('Main Response', speechText)
+            .withSimpleCard('Calendario Ecologico Pineto', speechText)
             .getResponse();
     }
 }
-
-skillBuilder.addRequestHandlers(
-    LaunchRequestHandler,
-    MainRequestHandler
-)
 
 const skill = skillBuilder.create();
 
