@@ -26,7 +26,8 @@ const LaunchRequestHandler = {
 
 const MainRequestHandler = {
     canHandle(handlerInput){
-        return handlerInput.requestEnvelope.request.intent.name === "MainIntent";
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest' 
+            && handlerInput.requestEnvelope.request.intent.name === "MainIntent";
     },
     handle(handlerInput){
 
@@ -72,8 +73,8 @@ const HelpIntentHandler = {
 const CancelAndStopIntentHandler = {
     canHandle(handlerInput) {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-            && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.CancelIntent'
-                || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent';
+            && (handlerInput.requestEnvelope.request.intent.name === 'AMAZON.CancelIntent'
+                || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent');
     },
     handle(handlerInput) {
         const speakOutput = 'A presto, dal Calendario Ecologico Pineto!';
