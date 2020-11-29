@@ -143,7 +143,6 @@ const ErrorHandler = {
 skillBuilder.addRequestHandlers(
     LaunchRequestHandler,
     MainRequestHandler,
-    ErrorHandler,
     CancelAndStopIntentHandler,
     FallbackIntentHandler,
     HelpIntentHandler,
