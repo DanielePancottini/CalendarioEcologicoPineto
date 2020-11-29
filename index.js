@@ -57,7 +57,7 @@ const MainRequestHandler = {
 const HelpIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.HelpIntent';
+            && Alexa.getIntentName(handlerInput.requestEnvelope.request.intent.name) === 'AMAZON.HelpIntent';
     },
     handle(handlerInput) {
         const speakOutput = 'You can say hello to me! How can I help?';
@@ -72,8 +72,8 @@ const HelpIntentHandler = {
 const CancelAndStopIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && (Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.CancelIntent'
-                || Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.StopIntent');
+            && (Alexa.getIntentName(handlerInput.requestEnvelope.request.intent.name) === 'AMAZON.CancelIntent'
+                || Alexa.getIntentName(handlerInput.requestEnvelope.request.intent.name) === 'AMAZON.StopIntent');
     },
     handle(handlerInput) {
         const speakOutput = 'A presto, dal Calendario Ecologico Pineto!';
@@ -92,7 +92,7 @@ const CancelAndStopIntentHandler = {
 const FallbackIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.FallbackIntent';
+            && Alexa.getIntentName(handlerInput.requestEnvelope.request.intent.name) === 'AMAZON.FallbackIntent';
     },
     handle(handlerInput) {
         const speakOutput = 'Ops, non riesco a capire la tua richiesta, riprova';
@@ -111,7 +111,7 @@ const FallbackIntentHandler = {
  * */
 const SessionEndedRequestHandler = {
     canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'SessionEndedRequest';
+        return Alexa.getRequestType(handlerInput.requestEnvelope.request.intent.name) === 'SessionEndedRequest';
     },
     handle(handlerInput) {
         console.log(`~~~~ Session ended: ${JSON.stringify(handlerInput.requestEnvelope)}`);
