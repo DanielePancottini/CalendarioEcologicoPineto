@@ -35,10 +35,9 @@ const MainRequestHandler = {
         var dayOfRequest = dateOfRequest.getDay();
         var monthOfRequest = dateOfRequest.getMonth();
 
-        var toThrow = data.days[dayOfRequest].toThrow;
+        dayOfRequest = (dayOfRequest != 6) ? dayOfRequest + 1 : 0
 
-        console.log(toThrow);
-        
+        var toThrow = data.days[dayOfRequest].toThrow;
 
         var speechText = (toThrow.length > 0) ? "Ecco cosa c'è da buttare oggi: " : "Oggi non c'è nulla da buttare";
 
